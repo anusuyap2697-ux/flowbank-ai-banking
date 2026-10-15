@@ -1,0 +1,1522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FlowBank | Personalised AI Banking & Autonomous Telemetry</title>
+  <meta name="description" content="FlowBank Personalised AI Banking - Autonomous Financial Telemetry, Multi-Goal Priority Engine, Isolation Forest Anomaly Detection, and WhatsApp Nudge Bridge." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./src/style.css" />
+</head>
+<body>
+  <!-- Top App Container -->
+  <div id="app" class="flowbank-app">
+
+    <!-- Real-Time In-App Dynamic Alert Banner (Slides down when automatic alert triggers) -->
+    <div class="in-app-alert-banner" id="inAppAlertBanner">
+      <div class="alert-banner-left">
+        <div class="alert-banner-icon pulse-alarm">🚨</div>
+        <div class="alert-banner-content">
+          <div class="alert-banner-title">
+            <strong>FlowBank AI Telemetry Guard</strong> &bull; <span class="alert-banner-time">Just Now</span>
+            <span class="auto-tag" id="alertBannerTag">AUTO-ALERT</span>
+          </div>
+          <div class="alert-banner-body" id="inAppAlertBody">
+            Automatic spend alert: <strong>₹3,500 at TechStore</strong>! Your <strong>School Fees target</strong> is delayed by 4 days.
+          </div>
+        </div>
+      </div>
+      <div class="alert-banner-actions">
+          <button class="banner-btn-wa" id="btnBannerSendWa">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#25D366">
+              <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2z"/>
+            </svg>
+            <span>⚡ App Send Bank Alert</span>
+          </button>
+        <button class="banner-btn-lock" id="btnBannerLock">
+          🔒 Lock Discretionary Limit
+        </button>
+        <button class="banner-btn-dismiss" id="btnBannerDismiss" title="Dismiss">&times;</button>
+      </div>
+    </div>
+
+    <!-- Global Header -->
+    <header class="flow-header">
+      <div class="header-left">
+        <div class="logo-box">FB</div>
+        <div class="brand-info">
+          <div class="brand-title-row">
+            <span class="brand-name">FlowBank</span>
+            <span class="brand-subtitle">Personalised AI Banking</span>
+          </div>
+          <div class="brand-tagline">Autonomous Financial Telemetry & Multi-Goal Priority Engine</div>
+        </div>
+      </div>
+
+      <div class="header-center">
+        <div class="consent-pill active" id="consentBadge">
+          <span class="pulse-dot"></span>
+          <span class="consent-text" id="headerConsentText">CONSENT ACTIVE &bull; RBI AA Framework</span>
+        </div>
+
+        <!-- Language Selector: English & தமிழ் (Tamil) -->
+        <button class="lang-pill-btn" id="btnToggleLang" title="Switch Language / மொழியை மாற்றுக (English / தமிழ்)">
+          <span class="lang-icon">🌐</span>
+          <span class="lang-label-active" id="langActiveLabel">English</span>
+          <span class="lang-divider">/</span>
+          <span class="lang-label-alt" id="langAltLabel">தமிழ்</span>
+        </button>
+      </div>
+
+      <div class="header-right">
+        <!-- Header Real WhatsApp Destination Chip -->
+        <button class="header-wa-chip" id="btnHeaderWaChip" title="Configure your real WhatsApp number for autonomous app alerts">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="#25D366">
+            <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2z"/>
+          </svg>
+          <span class="wa-chip-label">WhatsApp:</span>
+          <span class="wa-chip-number font-mono" id="headerWaNumber">+91 (Not Set)</span>
+          <span class="wa-chip-dot" id="headerWaDot"></span>
+        </button>
+
+        <button class="btn-auto-monitor" id="btnToggleAutoMonitor" title="Toggle autonomous real-time transaction telemetry monitoring">
+          <span class="monitor-pulse" id="monitorPulse"></span>
+          <span id="autoMonitorLabel">Auto-Monitor: OFF</span>
+        </button>
+
+        <button class="btn-anomaly-spike" id="simulateAnomalySpikeBtn">
+          <svg class="bolt-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+          </svg>
+          <span>Simulate Anomaly Spike</span>
+        </button>
+
+        <div class="user-profile-badge">
+          <div class="user-avatar">AS</div>
+          <div class="user-details">
+            <span class="user-name">Aditya S.</span>
+            <span class="user-cid">(CID-9041)</span>
+          </div>
+          <div class="notif-bell" id="notifBell" title="Notifications">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+            </svg>
+            <span class="notif-badge" id="notifCount">1</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav class="flow-nav">
+      <div class="nav-tabs">
+        <button class="nav-tab active" data-tab="tab-auth" id="tabBtn1">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+          <span>1. Auth & Privacy Center</span>
+        </button>
+
+        <button class="nav-tab" data-tab="tab-priority" id="tabBtn2">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7"></rect>
+            <rect x="14" y="3" width="7" height="7"></rect>
+            <rect x="14" y="14" width="7" height="7"></rect>
+            <rect x="3" y="14" width="7" height="7"></rect>
+          </svg>
+          <span>2. Priority Engine & Dashboard</span>
+        </button>
+
+        <button class="nav-tab" data-tab="tab-whatsapp" id="tabBtn3">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+          </svg>
+          <span>3. WhatsApp Nudge Interface</span>
+        </button>
+      </div>
+
+      <div class="nav-right">
+        <div class="sync-badge">
+          <span class="sync-dot"></span>
+          <span>Live Web & Mobile Synchronized State</span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Mobile Device View Switcher (only visible on small screens < 800px) -->
+    <div class="mobile-device-view-bar" id="mobileDeviceViewBar">
+      <button class="m-dev-tab active" id="btnShowWebPane">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block;vertical-align:middle;margin-right:5px">
+          <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+          <line x1="8" y1="21" x2="16" y2="21"></line>
+          <line x1="12" y1="17" x2="12" y2="21"></line>
+        </svg>
+        🖥️ Web View
+      </button>
+      <button class="m-dev-tab" id="btnShowMobilePane">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block;vertical-align:middle;margin-right:5px">
+          <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+          <line x1="12" y1="18" x2="12.01" y2="18"></line>
+        </svg>
+        📱 App View
+      </button>
+    </div>
+
+    <!-- Main Workspace Container: Desktop View + Mobile Simulator View (Both visible side-by-side) -->
+    <main class="main-workspace dual-mode show-web" id="workspaceContainer">
+
+      <!-- Left Column: Desktop App Screens -->
+      <section class="desktop-pane" id="desktopPane">
+
+        <!-- SCREEN 1: Auth & Privacy Center -->
+        <div class="screen-view active" id="view-auth">
+          <!-- Privacy Top Banner Card -->
+          <div class="glass-card banner-privacy-card">
+            <div class="banner-privacy-header">
+              <div class="banner-title-group">
+                <div class="icon-square green-glow">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#00f5b8" stroke-width="2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  </svg>
+                </div>
+                <div>
+                  <h2 class="card-main-title">FlowBank AI Financial Advisor &ndash; Authentication & Granular Privacy Center</h2>
+                  <p class="card-description">
+                    Operates strictly under the Reserve Bank of India Account Aggregator (AA) framework. Financial telemetry is cryptographically isolated and processed in a client-side execution sandbox.
+                  </p>
+                </div>
+              </div>
+              <div class="rbi-badge" id="rbiBadgeStatus">
+                <span class="rbi-tag">RBI AA Consent:</span>
+                <span class="rbi-val">ACTIVE</span>
+              </div>
+            </div>
+
+            <div class="banner-action-row">
+              <button class="btn-fast-link" id="btnSimulateAadhaar">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="2" y1="12" x2="22" y2="12"></line>
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                </svg>
+                <span>Simulate Aadhaar AA Fast Link</span>
+              </button>
+              <div class="node-status-text">
+                &bull; Connected to Sahamati / Onemoney AA Node (Latency: 18ms)
+              </div>
+            </div>
+          </div>
+
+          <!-- Two Column Grid -->
+          <div class="auth-grid">
+            <!-- Left Col: Secure Client Authentication -->
+            <div class="glass-card auth-card">
+              <div class="card-header-row">
+                <div class="card-subtitle-with-icon">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#00f5b8" stroke-width="2">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                  </svg>
+                  <span class="card-subheading">Secure Client Authentication</span>
+                </div>
+                <span class="security-chip">TLS 1.3 / AES-256</span>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Registered User Email / FlowBank ID</label>
+                <div class="input-with-icon">
+                  <svg class="input-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                    <polyline points="22,6 12,13 2,6"></polyline>
+                  </svg>
+                  <input type="text" class="flow-input" id="authEmail" value="aditya.sharma@flowbank.in" />
+                </div>
+              </div>
+
+              <div class="form-row-two">
+                <div class="form-group flex-1">
+                  <label class="form-label">Password</label>
+                  <div class="input-with-icon">
+                    <svg class="input-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                      <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                      <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                    <input type="password" class="flow-input" id="authPassword" value="supersecurepass123" />
+                  </div>
+                </div>
+
+                <div class="form-group flex-1">
+                  <div class="label-with-action">
+                    <label class="form-label">4-Digit MPIN</label>
+                    <button class="toggle-link-btn" id="toggleMpinBtn">Toggle</button>
+                  </div>
+                  <div class="input-with-icon">
+                    <svg class="input-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                      <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                      <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                    </svg>
+                    <input type="password" maxlength="4" class="flow-input mpin-input" id="authMpin" value="9041" />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Registered WhatsApp Phone for Autonomous Alerts -->
+              <div class="form-group">
+                <div class="label-with-action">
+                  <label class="form-label">Registered WhatsApp Number (for Autonomous Alerts)</label>
+                  <span class="tag-verified">⚡ Live WhatsApp Delivery</span>
+                </div>
+                <div class="input-with-icon wa-auth-input-wrap">
+                  <span class="wa-prefix-badge">+91</span>
+                  <input type="tel" class="flow-input font-mono" id="authWaPhone" placeholder="Enter 10-digit mobile number" maxlength="12" />
+                  <button class="btn-wa-save-inline" id="btnSaveAuthWaPhone" title="Save WhatsApp phone number">Save</button>
+                </div>
+                <div class="field-hint-text">
+                  FlowBank automatically sends telemetry alerts to this WhatsApp when an anomaly or goal deviation is detected.
+                </div>
+              </div>
+
+              <button class="btn-authorize" id="btnAuthorizeLaunch">
+                <span>Authorize & Launch Financial Engine</span>
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+
+              <div class="link-bank-box" id="btnLinkBank" title="Click to choose or switch your bank account (All Indian Banks Supported)">
+                <div class="link-bank-content">
+                  <div class="link-icon">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M16 3h5v5"></path>
+                      <path d="M4 20L21 3"></path>
+                      <path d="M21 16v5h-5"></path>
+                      <path d="M15 15l6 6"></path>
+                      <path d="M4 4l5 5"></path>
+                    </svg>
+                  </div>
+                  <span class="link-text" id="activeBankLinkText">Connected Bank: HDFC Bank (Salary A/c XX-4092)</span>
+                  <span class="bank-switch-chip" id="lblSwitchBank">Switch Bank</span>
+                </div>
+                <div class="link-subtext" id="activeBankSubtext">
+                  <span class="check-green">&check;</span> Connected to Sahamati RBI AA Network &bull; <strong>All Banks Supported:</strong> SBI, HDFC, ICICI, Axis, Kotak, PNB, Canara, Indian Bank & more.
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Col: Granular Privacy & User Consent Control Panel -->
+            <div class="glass-card consent-card">
+              <div class="card-header-row">
+                <div class="card-subtitle-with-icon">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#00f5b8" stroke-width="2">
+                    <line x1="4" y1="21" x2="4" y2="14"></line>
+                    <line x1="4" y1="10" x2="4" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12" y2="3"></line>
+                    <line x1="20" y1="21" x2="20" y2="16"></line>
+                    <line x1="20" y1="12" x2="20" y2="3"></line>
+                    <line x1="1" y1="14" x2="7" y2="14"></line>
+                    <line x1="9" y1="8" x2="15" y2="8"></line>
+                    <line x1="17" y1="16" x2="23" y2="16"></line>
+                  </svg>
+                  <span class="card-subheading">Granular Privacy & User Consent Control Panel</span>
+                </div>
+                <span class="revocable-chip">User Revocable</span>
+              </div>
+
+              <p class="privacy-instructions">
+                Configure explicit data permissions dictating which real-time signals the local algorithmic models are permitted to consume.
+              </p>
+
+              <div class="toggle-list">
+                <!-- Toggle Item 1 -->
+                <div class="toggle-item">
+                  <div class="toggle-item-info">
+                    <div class="toggle-title">1. Automated Transaction Ingestion</div>
+                    <div class="toggle-desc">Direct encrypted sync from linked AA savings & UPI handles</div>
+                  </div>
+                  <label class="switch">
+                    <input type="checkbox" id="toggleAaIngestion" checked />
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+
+                <!-- Toggle Item 2 -->
+                <div class="toggle-item">
+                  <div class="toggle-item-info">
+                    <div class="toggle-title">2. Predictive What-If Goal Simulation Engine</div>
+                    <div class="toggle-desc">Enables Multi-Attribute Decision Making (MADM) scenario modeling</div>
+                  </div>
+                  <label class="switch">
+                    <input type="checkbox" id="toggleWhatIfEngine" checked />
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+
+                <!-- Toggle Item 3 -->
+                <div class="toggle-item">
+                  <div class="toggle-item-info">
+                    <div class="toggle-title">3. WhatsApp Real-Time Action Nudges</div>
+                    <div class="toggle-desc">Authorizes automated conversational safety interventions upon anomaly detection</div>
+                  </div>
+                  <label class="switch">
+                    <input type="checkbox" id="toggleWhatsappNudges" checked />
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Bottom Security Notice Box -->
+              <div class="security-footer-box">
+                <div class="sec-lock-icon">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#00f5b8" stroke-width="2">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                  </svg>
+                </div>
+                <div class="sec-text-lines">
+                  <span class="sec-highlight">🔒 AES-256 Encrypted</span> &nbsp;|&nbsp;
+                  <span>Zero Plain-Text Financial Data Stored</span> &nbsp;|&nbsp;
+                  <span>1-Tap Category Override Enabled</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SCREEN 2: Priority Engine & Dashboard -->
+        <div class="screen-view" id="view-priority">
+          <!-- Top 3 Metrics Cards -->
+          <div class="metrics-row">
+            <!-- Metric 1: Available Account Balance -->
+            <div class="glass-card metric-card">
+              <div class="metric-header">
+                <span class="metric-label">Available Account Balance</span>
+                <div class="metric-icon-small">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#00f5b8" stroke-width="2">
+                    <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                    <line x1="2" y1="10" x2="22" y2="10"></line>
+                  </svg>
+                </div>
+              </div>
+              <div class="metric-value font-mono" id="desktopBalanceVal">&#8377;1,24,500</div>
+              <div class="metric-sub positive">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                  <polyline points="17 6 23 6 23 12"></polyline>
+                </svg>
+                <span>+8.4% MoM (Savings Surplus +&#8377;9,600)</span>
+              </div>
+            </div>
+
+            <!-- Metric 2: Monthly Discretionary Spend Rate -->
+            <div class="glass-card metric-card">
+              <div class="metric-header">
+                <span class="metric-label">Monthly Discretionary Spend Rate</span>
+                <div class="metric-icon-small">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#f59e0b" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                  </svg>
+                </div>
+              </div>
+              <div class="metric-value-row">
+                <span class="metric-value font-mono" id="desktopSpendVal">&#8377;12,000</span>
+                <span class="metric-unit">/mo</span>
+              </div>
+              <div class="metric-sub warning">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                  <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
+                </svg>
+                <span>High Burn Rate Warning &bull; Telemetry Alert</span>
+              </div>
+            </div>
+
+            <!-- Metric 3: MADM Priority Alignment -->
+            <div class="glass-card metric-card">
+              <div class="metric-header">
+                <span class="metric-label">MADM Priority Alignment</span>
+                <div class="metric-icon-small">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#00f5b8" stroke-width="2">
+                    <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+                    <rect x="9" y="9" width="6" height="6"></rect>
+                    <line x1="9" y1="1" x2="9" y2="4"></line>
+                    <line x1="15" y1="1" x2="15" y2="4"></line>
+                    <line x1="9" y1="20" x2="9" y2="23"></line>
+                    <line x1="15" y1="20" x2="15" y2="23"></line>
+                    <line x1="20" y1="9" x2="23" y2="9"></line>
+                    <line x1="20" y1="14" x2="23" y2="14"></line>
+                    <line x1="1" y1="9" x2="4" y2="9"></line>
+                    <line x1="1" y1="14" x2="4" y2="14"></line>
+                  </svg>
+                </div>
+              </div>
+              <div class="metric-value text-cyan" id="desktopRankVal">Rank 1 Guarded</div>
+              <div class="metric-sub safe">
+                <span class="green-dot-bullet">&bull;</span>
+                <span id="rankGuardedText">Critical Hard-Deadline Protected</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Active Goals Section Header -->
+          <div class="section-title-bar">
+            <div class="section-title-left">
+              <span class="icon-ring">&bull;</span>
+              <h3 class="section-header-title">ACTIVE GOALS & DYNAMIC PRIORITY ENGINE</h3>
+            </div>
+            <div class="madm-chip">
+              MADM Multi-Attribute Optimization
+            </div>
+          </div>
+
+          <!-- Goals Cards Grid -->
+          <div class="goals-grid">
+            <!-- Goal 1: School Fees (Critical) -->
+            <div class="glass-card goal-card goal-card-critical">
+              <div class="goal-header">
+                <div class="goal-title-group">
+                  <div class="goal-icon-badge pink-tint">
+                    🎓
+                  </div>
+                  <div>
+                    <div class="goal-name">School Fees</div>
+                    <div class="goal-sub">Semester 2 Tuition & Books (Hard Deadline)</div>
+                  </div>
+                </div>
+                <div class="goal-badges-col">
+                  <span class="badge-priority-critical">PRIORITY #1 &bull; CRITICAL</span>
+                  <span class="badge-auto-bump">AUTOMATICALLY BUMPED TO #1 PRIORITY</span>
+                </div>
+              </div>
+
+              <div class="goal-progress-section">
+                <div class="progress-labels font-mono">
+                  <span class="amount-current" id="schoolFeesCur">&#8377;25,000</span>
+                  <span class="amount-target">/ &#8377;30,000</span>
+                  <span class="percent-label" id="schoolFeesPct">83%</span>
+                </div>
+                <div class="progress-track">
+                  <div class="progress-bar-fill teal-bar" id="schoolFeesBar" style="width: 83%;"></div>
+                </div>
+              </div>
+
+              <div class="goal-footer">
+                <div class="deadline-pill hard-deadline">
+                  📅 Hard Deadline: <strong>20 Days Left</strong>
+                </div>
+                <div class="allocation-note">
+                  Auto-allocated from salary
+                </div>
+              </div>
+            </div>
+
+            <!-- Goal 2: Laptop Buy (Flexible) -->
+            <div class="glass-card goal-card goal-card-flexible">
+              <div class="goal-header">
+                <div class="goal-title-group">
+                  <div class="goal-icon-badge amber-tint">
+                    💻
+                  </div>
+                  <div>
+                    <div class="goal-name">Laptop Buy</div>
+                    <div class="goal-sub">M3 Pro Development Workstation (Soft Deadline)</div>
+                  </div>
+                </div>
+                <div class="goal-badges-col">
+                  <span class="badge-priority-flex">PRIORITY #2 &bull; FLEXIBLE</span>
+                  <span class="badge-paused" id="laptopStatusBadge">TEMPORARILY PAUSED TO PROTECT SCHOOL FEES</span>
+                </div>
+              </div>
+
+              <div class="goal-progress-section">
+                <div class="progress-labels font-mono">
+                  <span class="amount-current">&#8377;32,000</span>
+                  <span class="amount-target">/ &#8377;50,000</span>
+                  <span class="percent-label">64%</span>
+                </div>
+                <div class="progress-track">
+                  <div class="progress-bar-fill blue-bar" style="width: 64%;"></div>
+                </div>
+              </div>
+
+              <div class="goal-footer">
+                <div class="deadline-pill soft-deadline">
+                  ⏱️ Soft Deadline: <strong>75 Days Left</strong>
+                </div>
+                <div class="delay-badge-chip" id="laptopDelayBadge">
+                  Projected delay: <strong id="laptopDelayDays">+8 Days</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dynamic What-If Goal Impact Simulator Card -->
+          <div class="glass-card simulator-card">
+            <div class="sim-header">
+              <div class="sim-header-left">
+                <div class="sim-icon-box">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#00f5b8" stroke-width="2">
+                    <line x1="4" y1="21" x2="4" y2="14"></line>
+                    <line x1="4" y1="10" x2="4" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12" y2="3"></line>
+                    <line x1="20" y1="21" x2="20" y2="16"></line>
+                    <line x1="20" y1="12" x2="20" y2="3"></line>
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="sim-title">DYNAMIC "WHAT-IF" GOAL IMPACT SIMULATOR</h4>
+                  <div class="sim-sub">Interactive velocity feedback modeling against subordinate priorities</div>
+                </div>
+              </div>
+              <div class="sim-value-pill font-mono" id="simSpendPill">&#8377;3,500</div>
+            </div>
+
+            <!-- Slider Control Row -->
+            <div class="sim-slider-container">
+              <div class="slider-top-labels">
+                <span class="slider-prompt">Simulate Extra Discretionary Spend: (Dining, Luxury & Impulse Purchases)</span>
+                <span class="slider-range-text">Range: &#8377;0 &ndash; &#8377;10,000</span>
+              </div>
+
+              <input type="range" min="0" max="10000" step="500" value="3500" class="custom-slider" id="whatIfSlider" />
+
+              <div class="slider-ticks">
+                <span>&#8377;0 (Strict Discipline)</span>
+                <span>&#8377;2,500</span>
+                <span>&#8377;5,000</span>
+                <span>&#8377;7,500</span>
+                <span>&#8377;10,000 (Severe Delay)</span>
+              </div>
+            </div>
+
+            <!-- Simulation Result Box -->
+            <div class="sim-result-box" id="simResultBox">
+              <div class="sim-result-left">
+                <div class="lightning-box">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="#f59e0b">
+                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                  </svg>
+                </div>
+                <div class="sim-result-text">
+                  <div class="sim-result-heading">
+                    <span class="flash-icon">⚡</span>
+                    <span class="result-title">Simulation Result:</span>
+                    <span class="madm-recalc-tag">MADM Recalculated</span>
+                  </div>
+                  <div class="sim-impact-statement" id="simImpactStatement">
+                    Spending <strong id="simSpendBold">&#8377;3,500</strong> extra this month will delay your <strong>'Laptop Buy'</strong> target date by <span class="highlight-delay" id="simDelayDays">8 Days</span>!
+                  </div>
+                </div>
+              </div>
+
+              <div class="sim-protection-badge">
+                <div class="guard-label">CRITICAL GOAL PROTECTION</div>
+                <div class="guard-status">
+                  <span class="check-circle">&check;</span> School Fees 100% Intact
+                </div>
+              </div>
+            </div>
+
+            <!-- Bottom Guardrail Bar -->
+            <div class="sim-footer-bar">
+              <div class="guardrail-info">
+                <span class="check-green">&check;</span>
+                <span>Hard Deadlines receive priority weight 1.0 (Critical Guardrail)</span>
+              </div>
+              <button class="link-action-btn" id="btnGoToWhatsApp">
+                <span>View WhatsApp Nudges &rarr;</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- SCREEN 3: WhatsApp Nudge Interface -->
+        <div class="screen-view" id="view-whatsapp">
+          <div class="glass-card whatsapp-container-card">
+            <!-- WhatsApp Agent Header -->
+            <div class="wa-header-bar">
+              <div class="wa-header-left">
+                <div class="wa-avatar-box">FB</div>
+                <div class="wa-info">
+                  <div class="wa-agent-title">
+                    <span>FlowBank AI Financial Advisor &ndash; WhatsApp Business API</span>
+                    <span class="wa-online-dot">🟢</span>
+                  </div>
+                  <div class="wa-agent-sub">Official Verified Banking Agent &bull; Automated Webhook Bridge</div>
+                </div>
+              </div>
+              <div class="wa-e2e-badge">
+                <span>256-bit E2E Encrypted</span>
+              </div>
+            </div>
+
+            <!-- Official Bank App Automated Dispatcher Bar -->
+            <div class="real-whatsapp-banner">
+              <div class="real-wa-left">
+                <div class="real-wa-icon-box">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="#00f5b8">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                  </svg>
+                </div>
+                <div>
+                  <div class="real-wa-title">
+                    <span>FlowBank Automated Server:</span>
+                    <span class="bank-phone-pill font-mono">🏦 +91 1800-356-9226</span>
+                    <span class="bank-verified-tag">OFFICIAL BANK NUMBER</span>
+                  </div>
+                  <div class="real-wa-sub">
+                    Alerts automatically dispatched by bank app to: 
+                    <span class="user-dest-badge font-mono" id="screen3UserPhoneBadge">📱 +91 <span id="screen3UserPhoneDisplay">9876543210</span></span>
+                    <button class="btn-edit-wa-inline" id="btnEditUserWa" title="Change your registered WhatsApp phone number">✏️ Change</button>
+                  </div>
+                </div>
+              </div>
+              <div class="real-wa-form">
+                <button class="btn-send-real-wa" id="btnSendRealWhatsApp" title="App itself sends automated bank alert to your WhatsApp">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                  </svg>
+                  <span>⚡ App Send Alert Now</span>
+                </button>
+                <div class="auto-wa-pill-box">
+                  <label class="auto-switch-label" title="When ON, incoming impulse spend spikes automatically trigger autonomous bank alerts">
+                    <input type="checkbox" id="toggleAutoWaDispatch" checked />
+                    <span class="auto-toggle-slider"></span>
+                    <span class="auto-label-text">⚡ Auto-Alert: <strong id="autoWaStatusText">ON</strong></span>
+                  </label>
+                </div>
+                <div class="wa-lang-selector-box" title="WhatsApp Alert Language / வாட்ஸ்அப் எச்சரிக்கை மொழி">
+                  <span class="wa-lang-globe">🌐</span>
+                  <select class="wa-lang-dropdown" id="waAlertLangSelect">
+                    <option value="both">Bilingual (English + தமிழ்)</option>
+                    <option value="ta">தமிழ் (Tamil Alert)</option>
+                    <option value="en">English (English Alert)</option>
+                  </select>
+                </div>
+                <button class="btn-wa-settings" id="btnOpenWaGatewayModal" title="Configure background automated WhatsApp gateway (CallMeBot, Twilio, Webhook)">
+                  ⚙️ Gateway API
+                </button>
+              </div>
+            </div>
+
+            <!-- ═══ DAILY SCHEDULED ALERT PANEL ═══ -->
+            <div class="daily-alert-panel" id="dailyAlertPanel">
+              <div class="dap-header">
+                <div class="dap-header-left">
+                  <div class="dap-icon-box">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#00f5b8" stroke-width="2">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="dap-title">📅 Daily Scheduled WhatsApp Alerts</div>
+                    <div class="dap-sub">Auto-sends morning & evening financial summaries + AI spending suggestions</div>
+                  </div>
+                </div>
+                <div class="dap-master-toggle-wrap">
+                  <label class="switch" title="Enable/Disable all daily scheduled alerts">
+                    <input type="checkbox" id="toggleDailyAlerts" checked />
+                    <span class="slider round"></span>
+                  </label>
+                  <span class="dap-toggle-label" id="dailyAlertsStatusText">ACTIVE</span>
+                </div>
+              </div>
+
+              <div class="dap-schedule-grid">
+                <!-- Morning Alert -->
+                <div class="dap-schedule-card morning-card" id="morningCard">
+                  <div class="dap-card-top">
+                    <div class="dap-time-badge morning-badge">🌅 MORNING</div>
+                    <div class="dap-next-fire" id="morningNextFire">Next: Calculating...</div>
+                  </div>
+                  <div class="dap-time-row">
+                    <input type="time" class="dap-time-input" id="morningAlertTime" value="07:00" />
+                    <label class="switch small-switch">
+                      <input type="checkbox" id="toggleMorningAlert" checked />
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
+                  <div class="dap-preview-text" id="morningPreviewText">
+                    🌅 Good Morning, Aditya! Your FlowBank daily briefing...
+                  </div>
+                  <button class="dap-test-btn" id="btnTestMorningAlert">
+                    <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                    Send Test Now
+                  </button>
+                </div>
+
+                <!-- Evening Alert -->
+                <div class="dap-schedule-card evening-card" id="eveningCard">
+                  <div class="dap-card-top">
+                    <div class="dap-time-badge evening-badge">🌙 EVENING</div>
+                    <div class="dap-next-fire" id="eveningNextFire">Next: Calculating...</div>
+                  </div>
+                  <div class="dap-time-row">
+                    <input type="time" class="dap-time-input" id="eveningAlertTime" value="20:00" />
+                    <label class="switch small-switch">
+                      <input type="checkbox" id="toggleEveningAlert" checked />
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
+                  <div class="dap-preview-text" id="eveningPreviewText">
+                    🌙 Good Evening! Your daily spending wrap-up...
+                  </div>
+                  <button class="dap-test-btn" id="btnTestEveningAlert">
+                    <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                    Send Test Now
+                  </button>
+                </div>
+              </div>
+
+              <!-- Live Countdown -->
+              <div class="dap-countdown-bar">
+                <div class="dap-countdown-item">
+                  <span class="dap-countdown-label">⏰ Next Morning Alert in:</span>
+                  <span class="dap-countdown-value font-mono" id="morningCountdown">--:--:--</span>
+                </div>
+                <div class="dap-divider-v"></div>
+                <div class="dap-countdown-item">
+                  <span class="dap-countdown-label">🌙 Next Evening Alert in:</span>
+                  <span class="dap-countdown-value font-mono" id="eveningCountdown">--:--:--</span>
+                </div>
+                <div class="dap-divider-v"></div>
+                <div class="dap-countdown-item">
+                  <span class="dap-countdown-label">📨 Total Alerts Sent Today:</span>
+                  <span class="dap-countdown-value font-mono text-teal" id="alertsSentToday">0</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- WhatsApp Message Thread Box -->
+            <div class="wa-chat-window" id="waChatWindow">
+              <!-- Date Divider -->
+              <div class="wa-date-divider">
+                <span>Today</span>
+              </div>
+
+              <!-- Message 1: Impulse Spend Alert -->
+              <div class="wa-message-bubble bubble-alert" id="waBubbleAlert">
+                <div class="bank-app-sender-header">
+                  <div class="bank-app-logo-badge">
+                    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#00f5b8" stroke-width="2.2">
+                      <path d="M3 21h18M3 10h18M5 10v11M9 10v11M15 10v11M19 10v11M12 2L2 7h20L12 2z"/>
+                    </svg>
+                    <span class="bank-badge-text">FB</span>
+                  </div>
+                  <div class="bank-app-sender-info">
+                    <div class="bank-app-name-row">
+                      <span class="bank-official-name">FlowBank Official App</span>
+                      <span class="bank-green-check" title="Official Verified Bank Business Account">
+                        <svg viewBox="0 0 24 24" width="13" height="13" fill="#25D366">
+                          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                      </span>
+                      <span class="bank-verified-tag">BANK APP</span>
+                    </div>
+                    <div class="bank-app-meta-sub">Automated Telemetry Guard &bull; RBI AA Licensed</div>
+                  </div>
+                </div>
+                <div class="bubble-header-alert">
+                  <span class="alert-emoji">🚨</span>
+                  <span class="alert-title-text">Impulse Spend Alert!</span>
+                </div>
+                <p class="bubble-content-text">
+                  You just spent <strong class="font-mono">&#8377;3,500</strong> on Shopping at TechStore. Based on your current savings velocity, this purchase delays your <strong>'School Fees Target'</strong> by <span class="text-red">4 days</span>!
+                </p>
+                <div class="bank-msg-footer">
+                  <span class="bank-footer-badge">🔒 FlowBank Security: Never share OTP, MPIN or passwords</span>
+                </div>
+                <div class="bubble-meta">
+                  <span class="bubble-time">14:32</span>
+                  <span class="wa-ticks">&#10003;&#10003;</span>
+                </div>
+              </div>
+
+              <!-- Message 2: AI Advisor Recommendation -->
+              <div class="wa-message-bubble bubble-recommendation" id="waBubbleRec">
+                <div class="bank-app-sender-header">
+                  <div class="bank-app-logo-badge">
+                    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#00f5b8" stroke-width="2.2">
+                      <path d="M3 21h18M3 10h18M5 10v11M9 10v11M15 10v11M19 10v11M12 2L2 7h20L12 2z"/>
+                    </svg>
+                    <span class="bank-badge-text">FB</span>
+                  </div>
+                  <div class="bank-app-sender-info">
+                    <div class="bank-app-name-row">
+                      <span class="bank-official-name">FlowBank Official App</span>
+                      <span class="bank-green-check" title="Official Verified Bank Business Account">
+                        <svg viewBox="0 0 24 24" width="13" height="13" fill="#25D366">
+                          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                      </span>
+                      <span class="bank-verified-tag">BANK APP</span>
+                    </div>
+                    <div class="bank-app-meta-sub">AI Financial Advisor &bull; Autonomous Budget Telemetry</div>
+                  </div>
+                </div>
+                <div class="bubble-header-rec">
+                  <span class="rec-sparkle">✨</span>
+                  <span class="rec-title-text">AI Advisor Recommendation</span>
+                </div>
+                <p class="bubble-content-text">
+                  <span class="bulb-icon">💡</span> <strong>Recommended Action:</strong> School Fees has been shifted to <strong>Priority #1</strong>. We recommend locking discretionary spending for <strong>10 days</strong> to stay on track.
+                </p>
+
+                <!-- Interactive Action Buttons -->
+                <div class="wa-action-buttons">
+                  <button class="wa-btn-action wa-btn-real-dispatch" id="btnBubbleSendRealWa">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="#25D366">
+                      <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2z"/>
+                    </svg>
+                    <span>⚡ App Send Bank Alert</span>
+                  </button>
+                  <button class="wa-btn-action wa-btn-lock" id="btnWaLockSpend">
+                    <span>🔒 Lock Discretionary Limit (&#8377;2,000 for 10d)</span>
+                  </button>
+                  <button class="wa-btn-action wa-btn-adjust" id="btnWaAdjustPriorities">
+                    <span>🔀 Adjust Goal Priorities</span>
+                  </button>
+                  <button class="wa-btn-action wa-btn-simulator" id="btnWaOpenSimulator">
+                    <span>📊 Open What-If Simulator (Screen 2)</span>
+                  </button>
+                </div>
+
+                <div class="bank-msg-footer">
+                  <span class="bank-footer-badge">🔒 FlowBank Security: Encrypted banking channel &bull; RBI AA compliant</span>
+                </div>
+
+                <div class="bubble-meta">
+                  <span class="bubble-time">14:33</span>
+                  <span class="wa-ticks">&#10003;&#10003;</span>
+                </div>
+              </div>
+
+              <!-- Dynamic Chat Response Messages will appear here -->
+              <div id="dynamicChatContainer"></div>
+            </div>
+
+            <!-- WhatsApp Interactive Input Box -->
+            <div class="wa-input-footer">
+              <div class="wa-input-wrap">
+                <input type="text" class="wa-input-field" id="waUserInput" placeholder="Ask FlowBank Advisor (e.g. 'Can I afford dinner tonight?', 'What is my budget?')..." />
+                <button class="wa-send-btn" id="waSendBtn" title="Send message">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                  </svg>
+                </button>
+              </div>
+              <div class="wa-hints-row">
+                <span>Quick prompts:</span>
+                <button class="quick-chip" data-prompt="Can I spend ₹800 on dinner tonight?">"Afford ₹800 dinner?"</button>
+                <button class="quick-chip" data-prompt="How many days left for School Fees?">"School Fees deadline?"</button>
+                <button class="quick-chip" data-prompt="Unlock discretionary limit">"Unlock limit"</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Right Column: Interactive Smartphone Device Frame Simulator -->
+      <aside class="mobile-pane" id="mobilePane">
+        <div class="phone-frame">
+          <!-- Dynamic Island / Speaker Slit -->
+          <div class="phone-notch">
+            <div class="notch-island" id="notchIsland">
+              <div class="camera-lens"></div>
+              <div class="island-expanded-content" id="islandContent">
+                <span class="island-dot">🚨</span>
+                <span class="island-text" id="islandText">Spike: ₹3,500</span>
+              </div>
+              <div class="indicator-green"></div>
+            </div>
+          </div>
+
+          <!-- Phone Status Bar -->
+          <div class="phone-status-bar">
+            <span class="status-time">9:41</span>
+            <div class="status-icons">
+              <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor">
+                <path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 19.4c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.9-1.9C9.22 19.66 10.56 20 12 20c4.97 0 9-4.03 9-9s-4.03-9-9-9z"/>
+              </svg>
+              <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor">
+                <path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98A16.88 16.88 0 0 0 12 4z"/>
+              </svg>
+              <div class="battery-icon">
+                <div class="battery-body">
+                  <div class="battery-level"></div>
+                </div>
+                <div class="battery-terminal"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Phone Floating Push Notification Banner (App Logo + Name) -->
+          <div class="phone-push-notification" id="phonePushNotification">
+            <div class="ppn-header">
+              <div class="ppn-brand">
+                <div class="ppn-logo">FB</div>
+                <span class="ppn-name">FLOWBANK</span>
+                <span class="ppn-verified" title="Verified Banking App">✓</span>
+              </div>
+              <span class="ppn-time" id="ppnTime">now</span>
+            </div>
+            <div class="ppn-title" id="ppnTitle">🌅 Morning Financial Briefing</div>
+            <div class="ppn-body" id="ppnBody">Daily Safe Budget: ₹312/day. School Fees Goal: 83% funded.</div>
+            <div class="ppn-footer">
+              <span class="ppn-tag">Official Bank Alert</span>
+              <span class="ppn-action">Tap to view &rarr;</span>
+            </div>
+          </div>
+
+          <!-- Phone In-App Header -->
+          <div class="phone-app-header">
+            <div class="phone-brand">
+              <span class="phone-logo-badge">FB</span>
+              <span class="phone-app-name">FlowBank</span>
+              <span class="phone-ps-tag">PS-003</span>
+            </div>
+            <div class="phone-aa-pill">AA ACTIVE</div>
+          </div>
+
+          <!-- Phone Screen Dynamic View Content -->
+          <div class="phone-body-scroll" id="phoneScrollArea">
+
+            <!-- MOBILE VIEW 1: Privacy & Auth -->
+            <div class="phone-view active" id="mview-auth">
+              <div class="mcard sandbox-mcard">
+                <div class="mcard-top-row">
+                  <span class="mcard-title">Privacy Sandbox Mode</span>
+                  <span class="mcard-sub-badge">RBI AA</span>
+                </div>
+                <p class="mcard-text">
+                  Client credentials securely sandboxed under Onemoney AA node.
+                </p>
+              </div>
+
+              <div class="mcard auth-mcard">
+                <div class="mcard-heading">Mobile Authentication</div>
+                <div class="m-input-box">
+                  <input type="text" class="m-input" value="aditya.sharma@flowbank.in" readonly />
+                </div>
+                <div class="m-input-box">
+                  <input type="password" class="m-input" value="password123" readonly />
+                </div>
+                <button class="m-btn-primary" id="mBtnSignIn">Sign In</button>
+              </div>
+
+              <div class="mcard telemetry-mcard">
+                <div class="mcard-heading">Live Telemetry Toggles</div>
+                <div class="m-toggle-row">
+                  <span>AA Ingestion</span>
+                  <span class="m-status-enabled" id="mStatusAa">ENABLED</span>
+                </div>
+                <div class="m-toggle-row">
+                  <span>What-If Engine</span>
+                  <span class="m-status-enabled" id="mStatusWhatIf">ENABLED</span>
+                </div>
+                <div class="m-toggle-row">
+                  <span>WhatsApp Nudges</span>
+                  <span class="m-status-enabled" id="mStatusNudges">ENABLED</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- MOBILE VIEW 2: Priority Dashboard & What-If -->
+            <div class="phone-view" id="mview-priority">
+              <div class="m-stats-dual">
+                <div class="m-stat-box">
+                  <div class="m-stat-label">Total Balance</div>
+                  <div class="m-stat-val font-mono" id="mBalanceVal">&#8377;1,24,500</div>
+                  <div class="m-stat-sub text-green">+8.4% MoM</div>
+                </div>
+                <div class="m-stat-box">
+                  <div class="m-stat-label">Discretionary Velocity</div>
+                  <div class="m-stat-val font-mono" id="mDiscretionaryVal">&#8377;12,000<span class="m-unit">/mo</span></div>
+                  <div class="m-stat-sub text-amber">Burn Rate Alert</div>
+                </div>
+              </div>
+
+              <!-- Goal 1 Mobile: School Fees -->
+              <div class="mcard m-goal-card m-school-fees">
+                <div class="m-goal-row1">
+                  <div class="m-goal-left">
+                    <span class="m-goal-icon">🎓</span>
+                    <div>
+                      <div class="m-goal-name">School Fees</div>
+                      <div class="m-goal-deadline">Hard Deadline: 20d left</div>
+                    </div>
+                  </div>
+                  <span class="m-pill-critical">#1 PRIORITY</span>
+                </div>
+                <div class="m-goal-numbers font-mono">
+                  <span id="mSchoolFeesCur">&#8377;25,000</span> / &#8377;30,000
+                  <span class="m-pct" id="mSchoolFeesPct">83%</span>
+                </div>
+                <div class="m-progress-track">
+                  <div class="m-progress-fill m-teal-fill" id="mSchoolFeesBar" style="width: 83%;"></div>
+                </div>
+              </div>
+
+              <!-- Goal 2 Mobile: Laptop Buy -->
+              <div class="mcard m-goal-card m-laptop-buy">
+                <div class="m-goal-row1">
+                  <div class="m-goal-left">
+                    <span class="m-goal-icon">💻</span>
+                    <div>
+                      <div class="m-goal-name">Laptop Buy</div>
+                      <div class="m-goal-deadline">Soft Deadline: 75d left</div>
+                    </div>
+                  </div>
+                  <span class="m-pill-paused" id="mLaptopPauseBadge">PAUSED FOR FEES</span>
+                </div>
+                <div class="m-goal-numbers font-mono">
+                  <span>&#8377;32,000</span> / &#8377;50,000
+                  <span class="m-delay-alert" id="mLaptopDelayBadge">+8 Days Delay</span>
+                </div>
+                <div class="m-progress-track">
+                  <div class="m-progress-fill m-blue-fill" style="width: 64%;"></div>
+                </div>
+              </div>
+
+              <!-- What If Spend Interactive Mobile Slider -->
+              <div class="mcard m-whatif-card">
+                <div class="m-whatif-header">
+                  <span class="m-whatif-title">What-If Spend:</span>
+                  <span class="m-whatif-val font-mono" id="mSimSpendVal">&#8377;3,500</span>
+                </div>
+                <input type="range" min="0" max="10000" step="500" value="3500" class="custom-slider m-slider" id="mWhatIfSlider">
+                <div class="m-sim-result" id="mSimResult">
+                  <span class="bolt-tiny">⚡</span>
+                  <span>Result: +<strong id="mSimSpendBold">&#8377;3,500</strong> spend delays Laptop by <strong class="text-red" id="mDelayDays">8 Days</strong>!</span>
+                </div>
+              </div>
+
+              <!-- Recent Transactions Mobile List -->
+              <div class="m-tx-section">
+                <div class="m-tx-header">RECENT TRANSACTIONS</div>
+
+                <div class="m-tx-item">
+                  <div class="m-tx-left">
+                    <span class="m-tx-icon">🍔</span>
+                    <div>
+                      <div class="m-tx-name">Swiggy</div>
+                      <div class="m-tx-cat">Food & Dining</div>
+                    </div>
+                  </div>
+                  <div class="m-tx-right">
+                    <span class="m-tx-amount font-mono">-&#8377;450</span>
+                    <button class="m-btn-override" data-tx="swiggy">Override</button>
+                  </div>
+                </div>
+
+                <div class="m-tx-item spike-highlight" id="mTxTechStore">
+                  <div class="m-tx-left">
+                    <span class="m-tx-icon">🛍️</span>
+                    <div>
+                      <div class="m-tx-name">TechStore</div>
+                      <div class="m-tx-cat text-red" id="techStoreCatLabel">Impulse Spike</div>
+                    </div>
+                  </div>
+                  <div class="m-tx-right">
+                    <span class="m-tx-amount font-mono text-red">-&#8377;3,500</span>
+                    <button class="m-btn-override" id="btnOverrideTechStore" data-tx="techstore">Override</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- MOBILE VIEW 3: WhatsApp Mobile Chat -->
+            <div class="phone-view" id="mview-whatsapp">
+              <div class="m-wa-top-bar">
+                <div class="m-wa-contact">
+                  <div class="m-wa-avatar-box">
+                    <div class="m-wa-avatar">FB</div>
+                    <span class="m-wa-verified-badge" title="Official Verified Bank Business Account">✓</span>
+                  </div>
+                  <div>
+                    <div class="m-wa-name">FlowBank Official (+91 1800-356-9226) <span class="wa-check">🟢</span></div>
+                    <div class="m-wa-status">Official Verified Bank Business Line &bull; Automated Alerts</div>
+                  </div>
+                </div>
+                <div class="m-wa-phone-call" id="mPhoneCallBtn" title="Send WhatsApp">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="#25D366">
+                    <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2z"/>
+                  </svg>
+                </div>
+              </div>
+
+              <div class="m-wa-messages">
+                <!-- Mobile Message 1 -->
+                <div class="m-wa-bubble alert-m-bubble">
+                  <div class="m-bank-bubble-tag">
+                    <div class="m-bank-mini-logo">FB</div>
+                    <div class="m-bank-tag-text">
+                      <span class="m-bank-title">FlowBank App</span>
+                      <span class="m-bank-tick">✓</span>
+                    </div>
+                    <span class="m-bank-pill">BANK ALERT</span>
+                  </div>
+                  <div class="m-wa-title text-red">🚨 Impulse Spend Alert!</div>
+                  <div class="m-wa-body">
+                    Spent <strong class="font-mono">&#8377;3,500</strong> on Shopping! This delays School Fees by <strong class="text-red">4 days</strong>.
+                  </div>
+                  <div class="m-bank-security-note">🔒 Secured by FlowBank RBI AA</div>
+                  <div class="m-wa-time">14:32 &#10003;&#10003;</div>
+                </div>
+
+                <!-- Mobile Message 2 -->
+                <div class="m-wa-bubble rec-m-bubble">
+                  <div class="m-bank-bubble-tag">
+                    <div class="m-bank-mini-logo">FB</div>
+                    <div class="m-bank-tag-text">
+                      <span class="m-bank-title">FlowBank App</span>
+                      <span class="m-bank-tick">✓</span>
+                    </div>
+                    <span class="m-bank-pill">AI ADVISOR</span>
+                  </div>
+                  <div class="m-wa-body">
+                    💡 Lock discretionary spending for <strong>10 days</strong> to stay on track.
+                  </div>
+                  <div class="m-wa-actions">
+                    <button class="m-wa-action-btn m-btn-real-wa" id="mBtnSendRealWhatsApp">
+                      ⚡ App Send Bank Alert
+                    </button>
+                    <button class="m-wa-action-btn" id="mBtnLockSpend">
+                      🔒 Lock Spend (&#8377;2,000 / 10d)
+                    </button>
+                    <button class="m-wa-action-btn" id="mBtnAdjustGoals">
+                      🔀 Adjust Goal Priorities
+                    </button>
+                    <button class="m-wa-action-btn" id="mBtnOpenSim">
+                      📊 Open What-If Simulator
+                    </button>
+                  </div>
+                  <div class="m-bank-security-note">🔒 Secured by FlowBank RBI AA</div>
+                  <div class="m-wa-time">14:33 &#10003;&#10003;</div>
+                </div>
+
+                <!-- Container for dynamic mobile responses -->
+                <div id="mDynamicChatContainer"></div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Phone Bottom Navigation Bar (3 items now: Privacy, Dashboard, Chat) -->
+          <nav class="phone-bottom-nav">
+            <button class="p-nav-item active" data-ptab="mview-auth" id="pnav1">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+              <span>Privacy</span>
+            </button>
+
+            <button class="p-nav-item" data-ptab="mview-priority" id="pnav2">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="7" height="7"></rect>
+                <rect x="14" y="3" width="7" height="7"></rect>
+                <rect x="14" y="14" width="7" height="7"></rect>
+                <rect x="3" y="14" width="7" height="7"></rect>
+              </svg>
+              <span>Dashboard</span>
+            </button>
+
+            <button class="p-nav-item" data-ptab="mview-whatsapp" id="pnav3">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+              </svg>
+              <span>WhatsApp</span>
+            </button>
+          </nav>
+        </div>
+      </aside>
+
+    </main>
+
+    <!-- Category Override Modal (Problem Statement requirement: Allow customers to correct categories) -->
+    <div class="modal-backdrop" id="overrideModal">
+      <div class="modal-dialog">
+        <div class="modal-header">
+          <div class="modal-title-row">
+            <span class="modal-icon">🏷️</span>
+            <h3>1-Tap Category & Spend Override</h3>
+          </div>
+          <button class="modal-close" id="closeOverrideModal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p class="modal-sub">
+            Under RBI AA & FlowBank privacy ethics, you retain sovereign control over transaction categorization. Changing an impulse spend restores prior goal velocities.
+          </p>
+          <div class="tx-inspect-box">
+            <div><strong>Transaction:</strong> TechStore Electronics</div>
+            <div><strong>Amount:</strong> <span class="font-mono text-red">&#8377;3,500.00</span></div>
+            <div><strong>Current Classification:</strong> <span class="badge-tag-red">Impulse Spike</span></div>
+          </div>
+
+          <label class="form-label" style="margin-top: 15px;">Select Correct Category:</label>
+          <div class="cat-options-grid">
+            <button class="btn-cat-opt" data-cat="Essential Education">📚 Essential Education</button>
+            <button class="btn-cat-opt" data-cat="Work / Productivity Tool">💻 Work / Productivity Tool</button>
+            <button class="btn-cat-opt" data-cat="Medical Emergency">🩺 Medical Emergency</button>
+            <button class="btn-cat-opt active" data-cat="Impulse Spike">🛍️ Impulse Spike (Default)</button>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-secondary" id="btnCancelOverride">Cancel</button>
+          <button class="btn-primary" id="btnSaveOverride">Apply Override & Recalculate</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hackathon Problem Statement PS-003 Modal (Matching Image 1) -->
+    <div class="modal-backdrop" id="psModal">
+      <div class="modal-dialog ps-dialog">
+        <div class="modal-header">
+          <div class="ps-header-meta">
+            <span class="ps-status-pill">&#128274; Problem Statement Unlocked & Active!</span>
+            <div class="ps-time-meta">
+              <span>📅 Checked in at: <strong>Oct 15, 2026, 10:11:09 AM</strong></span>
+              <span>🚩 24-Hour Code Freeze Deadline: <strong>Oct 16, 2026, 10:11:09 AM</strong></span>
+            </div>
+          </div>
+          <div class="ps-timer-box font-mono" id="freezeTimer">
+            ⏱️ 23:57:13
+          </div>
+          <button class="modal-close" id="closePsModal">&times;</button>
+        </div>
+
+        <div class="modal-body ps-content">
+          <div class="ps-title-banner">
+            <div class="ps-title-text">PS-003: Personalised Banking</div>
+            <div class="ps-tags">
+              <span class="ps-tag red-tag">&#127991; FinTech & Personalization</span>
+              <span class="ps-tag amber-tag">&#128202; MEDIUM</span>
+            </div>
+          </div>
+
+          <div class="ps-section">
+            <div class="ps-section-heading text-red">
+              <span class="ps-bullet-icon">🎯</span> Problem Statement
+            </div>
+            <p class="ps-text">
+              Build a banking-app feature that provides customers with personalized financial guidance based on their spending patterns, savings progress, and stated financial goals.
+            </p>
+          </div>
+
+          <div class="ps-section">
+            <div class="ps-section-heading text-red">
+              <span class="ps-bullet-icon">⚠️</span> Problem Faced & Challenges
+            </div>
+            <p class="ps-text">
+              Customers may find it difficult to understand spending patterns or translate financial goals into practical steps. Generic advice may not reflect a customer's circumstances, while inaccurate categorization or intrusive use of transaction data can reduce trust.
+            </p>
+          </div>
+
+          <div class="ps-section">
+            <div class="ps-section-heading text-red">
+              <span class="ps-bullet-icon">💡</span> Suggested Approach & Architecture
+            </div>
+            <p class="ps-text">
+              With appropriate consent, categorize transaction data and summarize cash flow, recurring expenses, savings progress, and goal milestones. Generate transparent, actionable suggestions with explanations and configurable preferences. Protect financial data, allow customers to correct categories or opt out, and avoid presenting automated guidance as guaranteed investment or financial outcomes.
+            </p>
+          </div>
+        </div>
+
+        <div class="modal-footer ps-footer">
+          <div class="footer-verified-note">
+            &check; FlowBank implementation strictly adheres to all PS-003 requirements with Client-Side Isolation Forest + RBI AA Sandboxing.
+          </div>
+          <button class="btn-primary" id="btnClosePsModalBtn">Return to App</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Aadhaar OTP Simulation Modal (All Indian Banks Supported via RBI AA) -->
+    <div class="modal-backdrop" id="aadhaarModal">
+      <div class="modal-dialog modal-dialog-wide">
+        <div class="modal-header">
+          <div class="modal-title-row">
+            <span class="modal-icon">🇮🇳</span>
+            <h3 id="aadhaarModalTitle">RBI Account Aggregator Fast Link</h3>
+          </div>
+          <button class="modal-close" id="closeAadhaarModal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p class="modal-sub" id="aadhaarModalDesc">
+            Connect any Indian bank account via the official RBI Sahamati Account Aggregator (FIP Network) to stream secure financial telemetry.
+          </p>
+
+          <!-- All Banks Selection Grid -->
+          <div class="form-group">
+            <label class="form-label" id="lblChooseBank"><strong>1. Select Your Primary Bank (All Indian Banks Supported):</strong></label>
+            <div class="bank-selector-grid" id="bankSelectorGrid">
+              <button type="button" class="bank-card-opt active" data-bank="HDFC" data-name="HDFC Bank" data-acc="Salary A/c XX-4092" data-bal="124500">
+                <span class="bank-logo-badge bg-blue">HDFC</span>
+                <span class="bank-card-title">HDFC Bank</span>
+                <span class="bank-card-acc">A/c XX-4092</span>
+              </button>
+              <button type="button" class="bank-card-opt" data-bank="SBI" data-name="State Bank of India" data-acc="Savings A/c XX-9401" data-bal="145200">
+                <span class="bank-logo-badge bg-sbi">SBI</span>
+                <span class="bank-card-title">State Bank of India</span>
+                <span class="bank-card-acc">A/c XX-9401</span>
+              </button>
+              <button type="button" class="bank-card-opt" data-bank="ICICI" data-name="ICICI Bank" data-acc="Savings A/c XX-3180" data-bal="98400">
+                <span class="bank-logo-badge bg-orange">ICICI</span>
+                <span class="bank-card-title">ICICI Bank</span>
+                <span class="bank-card-acc">A/c XX-3180</span>
+              </button>
+              <button type="button" class="bank-card-opt" data-bank="AXIS" data-name="Axis Bank" data-acc="Salary A/c XX-6612" data-bal="86300">
+                <span class="bank-logo-badge bg-maroon">AXIS</span>
+                <span class="bank-card-title">Axis Bank</span>
+                <span class="bank-card-acc">A/c XX-6612</span>
+              </button>
+              <button type="button" class="bank-card-opt" data-bank="KOTAK" data-name="Kotak Mahindra Bank" data-acc="Savings A/c XX-7734" data-bal="112000">
+                <span class="bank-logo-badge bg-red">KOTAK</span>
+                <span class="bank-card-title">Kotak Mahindra</span>
+                <span class="bank-card-acc">A/c XX-7734</span>
+              </button>
+              <button type="button" class="bank-card-opt" data-bank="PNB" data-name="Punjab National Bank" data-acc="Savings A/c XX-5219" data-bal="64800">
+                <span class="bank-logo-badge bg-pnb">PNB</span>
+                <span class="bank-card-title">Punjab National</span>
+                <span class="bank-card-acc">A/c XX-5219</span>
+              </button>
+              <button type="button" class="bank-card-opt" data-bank="BOB" data-name="Bank of Baroda" data-acc="Savings A/c XX-8841" data-bal="73150">
+                <span class="bank-logo-badge bg-bob">BOB</span>
+                <span class="bank-card-title">Bank of Baroda</span>
+                <span class="bank-card-acc">A/c XX-8841</span>
+              </button>
+              <button type="button" class="bank-card-opt" data-bank="CANARA" data-name="Canara Bank" data-acc="Savings A/c XX-2390" data-bal="58900">
+                <span class="bank-logo-badge bg-canara">CANARA</span>
+                <span class="bank-card-title">Canara Bank</span>
+                <span class="bank-card-acc">A/c XX-2390</span>
+              </button>
+              <button type="button" class="bank-card-opt" data-bank="INDIAN" data-name="Indian Bank" data-acc="Savings A/c XX-7721" data-bal="91200">
+                <span class="bank-logo-badge bg-indian">INDIAN</span>
+                <span class="bank-card-title">Indian Bank</span>
+                <span class="bank-card-acc">A/c XX-7721</span>
+              </button>
+              <button type="button" class="bank-card-opt" data-bank="UNION" data-name="Union Bank of India" data-acc="Savings A/c XX-4155" data-bal="67400">
+                <span class="bank-logo-badge bg-union">UNION</span>
+                <span class="bank-card-title">Union Bank</span>
+                <span class="bank-card-acc">A/c XX-4155</span>
+              </button>
+              <button type="button" class="bank-card-opt" data-bank="IDFC" data-name="IDFC FIRST Bank" data-acc="Savings A/c XX-9923" data-bal="105600">
+                <span class="bank-logo-badge bg-idfc">IDFC</span>
+                <span class="bank-card-title">IDFC FIRST</span>
+                <span class="bank-card-acc">A/c XX-9923</span>
+              </button>
+              <button type="button" class="bank-card-opt" data-bank="OTHER" data-name="Any Other Scheduled Bank" data-acc="A/c XX-1008" data-bal="80000">
+                <span class="bank-logo-badge bg-other">+ANY</span>
+                <span class="bank-card-title">Other Bank</span>
+                <span class="bank-card-acc">Scheduled Bank</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="form-row-two">
+            <div class="form-group flex-1">
+              <label class="form-label" id="lblAadhaarNum">2. Aadhaar Linked Mobile</label>
+              <input type="text" class="flow-input" value="+91 98*** **041" readonly />
+            </div>
+            <div class="form-group flex-1">
+              <label class="form-label" id="lblAadhaarOtp">3. Enter OTP (Pre-filled)</label>
+              <input type="text" class="flow-input font-mono" id="aadhaarOtp" value="829104" maxlength="6" style="letter-spacing: 4px; font-size: 1.1rem; text-align: center;" />
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-secondary" id="btnCancelAadhaar">Cancel</button>
+          <button class="btn-primary" id="btnConfirmAadhaar">Verify & Link Account</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Automated WhatsApp Gateway Settings Modal -->
+    <div class="modal-backdrop" id="waGatewayModal">
+      <div class="modal-dialog">
+        <div class="modal-header">
+          <div class="modal-title-row">
+            <span class="modal-icon">📲</span>
+            <h3>Automated WhatsApp Gateway Configuration</h3>
+          </div>
+          <button class="modal-close" id="closeWaGatewayModal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p class="modal-sub">
+            Configure direct background dispatch so the FlowBank app itself transmits alerts to your WhatsApp with zero manual clicks.
+          </p>
+
+          <div class="form-group">
+            <label class="form-label">Select Dispatch Method:</label>
+            <select class="flow-input" id="waGatewaySelect">
+              <option value="callmebot">CallMeBot Free Instant API (Direct Background WhatsApp)</option>
+              <option value="twilio">Twilio WhatsApp Sandbox</option>
+              <option value="webhook">Custom Webhook / Relay URL</option>
+              <option value="auto">Smart App & Web Bridge</option>
+            </select>
+          </div>
+
+          <!-- CallMeBot fields -->
+          <div id="callmebotFields" class="gateway-fields">
+            <div class="api-help-box">
+              💡 <strong>Get Free CallMeBot API Key in 10 seconds:</strong><br>
+              1. Save <strong>+34 644 10 55 84</strong> in your phone contacts.<br>
+              2. Send message: <code>I allow callmebot to send me messages</code> on WhatsApp.<br>
+              3. Paste the API key received below!
+            </div>
+            <div class="form-group" style="margin-top: 12px;">
+              <label class="form-label">CallMeBot API Key:</label>
+              <input type="text" class="flow-input font-mono" id="cmbApiKey" placeholder="e.g. 849201" value="" />
+            </div>
+          </div>
+
+          <!-- Twilio fields -->
+          <div id="twilioFields" class="gateway-fields" style="display: none;">
+            <div class="form-group">
+              <label class="form-label">Twilio Account SID:</label>
+              <input type="text" class="flow-input font-mono" id="twilioSid" placeholder="ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Twilio Auth Token:</label>
+              <input type="password" class="flow-input font-mono" id="twilioAuthToken" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Twilio Sender Number:</label>
+              <input type="text" class="flow-input font-mono" id="twilioSender" value="+14155238886" />
+            </div>
+          </div>
+
+          <!-- Webhook fields -->
+          <div id="webhookFields" class="gateway-fields" style="display: none;">
+            <div class="form-group">
+              <label class="form-label">Custom Webhook Relay URL:</label>
+              <input type="url" class="flow-input font-mono" id="customWebhookUrl" placeholder="https://your-webhook-relay.com/api" />
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-secondary" id="btnCancelWaGateway">Close</button>
+          <button class="btn-primary" id="btnSaveWaGateway">Save Gateway Settings</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Discretionary Lock Confirmation Toast -->
+    <div class="toast-notification" id="toastNotification">
+      <span class="toast-icon">🔒</span>
+      <span class="toast-msg" id="toastMessage">Discretionary spending limit locked at &#8377;2,000 for 10 days.</span>
+    </div>
+
+  </div>
+
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>
